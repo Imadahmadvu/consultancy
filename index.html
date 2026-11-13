@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Education Consultancy | Study Abroad</title>
+
+    <meta name="description" content="Professional education consultancy helping students find universities, scholarships and study abroad opportunities.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="header">
+
+        <a href="index.html" class="logo">
+            Edu<span>Consult</span>
+        </a>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="universities.html">Universities</a></li>
+                <li><a href="scholarships.html">Scholarships</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="register.html" class="register-btn">Apply Now</a>
+        </div>
+
+    </header>
+
+
+    <!-- Hero Section -->
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <span class="subtitle">
+                    YOUR FUTURE STARTS HERE
+                </span>
+
+                <h1>
+                    Build Your Future With
+                    <span>Global Education</span>
+                    Opportunities
+                </h1>
+
+                <p>
+                    We help students discover the right universities,
+                    scholarships and study opportunities around the world.
+                    Let us guide you towards a successful future.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="services.html" class="primary-btn">
+                        Explore Services
+                    </a>
+
+                    <a href="contact.html" class="secondary-btn">
+                        Get Free Consultation
+                    </a>
+                </div>
+
+                <div class="hero-info">
+
+                    <div>
+                        <h3>500+</h3>
+                        <p>Students Guided</p>
+                    </div>
+
+                    <div>
+                        <h3>50+</h3>
+                        <p>Universities</p>
+                    </div>
+
+                    <div>
+                        <h3>20+</h3>
+                        <p>Countries</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-image">
+
+                <img
+                    src="data:image/jpeg;base64,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"
+                    alt="Students studying abroad">
+
+            </div>
+
+        </section>
+
+
+        <!-- About Preview -->
+        <section class="about-section">
+
+            <div class="section-heading">
+                <span>ABOUT OUR COMPANY</span>
+                <h2>Helping Students Achieve Their Dreams</h2>
+            </div>
+
+            <p>
+                We provide professional educational consultancy
+                services to help students choose suitable universities,
+                explore scholarships and prepare for their academic journey.
+            </p>
+
+            <a href="about.html" class="primary-btn">
+                Learn More
+            </a>
+
+        </section>
+
+
+        <!-- Services -->
+        <section class="services-section">
+
+            <div class="section-heading">
+                <span>WHAT WE OFFER</span>
+                <h2>Our Professional Services</h2>
+                <p>Everything you need to start your education journey.</p>
+            </div>
+
+            <div class="services-container">
+
+                <div class="service-card">
+                    <h3>University Admission</h3>
+                    <p>
+                        Get guidance for university selection
+                        and admission applications.
+                    </p>
+                    <a href="services.html">Read More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3>Scholarship Guidance</h3>
+                    <p>
+                        Discover scholarship opportunities
+                        according to your qualifications.
+                    </p>
+                    <a href="scholarships.html">Read More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3>Visa Assistance</h3>
+                    <p>
+                        Get guidance about student visa
+                        documentation and procedures.
+                    </p>
+                    <a href="services.html">Read More →</a>
+                </div>
+
+                <div class="service-card">
+                    <h3>Career Counseling</h3>
+                    <p>
+                        Choose the right academic path
+                        for your future career.
+                    </p>
+                    <a href="services.html">Read More →</a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Universities -->
+        <section class="universities-section">
+
+            <div class="section-heading">
+                <span>STUDY DESTINATIONS</span>
+                <h2>Explore Top Universities</h2>
+            </div>
+
+            <div class="university-container">
+
+                <div class="university-card">
+                    <img src="assets/images/university-1.jpg"
+                         alt="University campus">
+                    <h3>Saudi Arabia</h3>
+                    <p>Explore universities in Saudi Arabia.</p>
+                    <a href="universities.html">Explore →</a>
+                </div>
+
+                <div class="university-card">
+                    <img src="assets/images/university-2.jpg"
+                         alt="International university">
+                    <h3>United Kingdom</h3>
+                    <p>Discover UK education opportunities.</p>
+                    <a href="universities.html">Explore →</a>
+                </div>
+
+                <div class="university-card">
+                    <img src="assets/images/university-3.jpg"
+                         alt="University building">
+                    <h3>United States</h3>
+                    <p>Find your preferred US university.</p>
+                    <a href="universities.html">Explore →</a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Scholarships -->
+        <section class="scholarship-section">
+
+            <div>
+                <span>FINANCIAL OPPORTUNITIES</span>
+
+                <h2>Make Your Education Affordable</h2>
+
+                <p>
+                    Explore available scholarships and financial
+                    opportunities to support your education.
+                </p>
+
+                <a href="scholarships.html" class="primary-btn">
+                    Find Scholarships
+                </a>
+            </div>
+
+        </section>
+
+
+        <!-- Call To Action -->
+        <section class="cta-section">
+
+            <h2>Ready To Start Your Journey?</h2>
+
+            <p>
+                Contact our team today and take the first step
+                towards your educational future.
+            </p>
+
+            <a href="contact.html" class="register-btn">
+                Contact Us
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div>
+                <h2>Edu<span>Consult</span></h2>
+
+                <p>
+                    Your trusted partner for educational
+                    consultancy and global opportunities.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div>
+                <h3>Student Area</h3>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="universities.html">Universities</a>
+                <a href="scholarships.html">Scholarships</a>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>© 2026 EduConsult. All Rights Reserved.</p>
+        </div>
+
+    </footer>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>
