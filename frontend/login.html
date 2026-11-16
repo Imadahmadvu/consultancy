@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduConsult - Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <div class="login-card">
+    <!-- LOGO  -->
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <div class="logo-text">
+        <h1>Edu<span>Consult</span></h1>
+        <p>Your Study Abroad Partner Ak!</p>
+      </div>
+    </div>
+
+    <h2>Login to Your Account</h2>
+    <p class="subtitle">Welcome back! Please login to continue</p>
+
+    <form id="loginForm">
+      <label>EMAIL ADDRESS</label>
+      <div class="input-group">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" placeholder="Enter your email" required>
+      </div>
+
+      <label>PASSWORD</label>
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <i class="fa-regular fa-eye toggle-eye" id="togglePass"></i>
+      </div>
+
+      <div class="options">
+        <label class="check"><input type="checkbox" checked> Remember Me</label>
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="btn-login">Login <i class="fa-solid fa-arrow-right"></i></button>
+
+      <div class="divider"><span>OR</span></div>
+
+      <button type="button" class="btn-google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+        Continue with Google
+      </button>
+
+      <p class="register">Don't have an account? <a href="#">Register Now</a></p>
+    </form>
+  </div>
+
+<script>
+  const toggle = document.getElementById('togglePass');
+  const pass = document.getElementById('password');
+  toggle.addEventListener('click', () => {    
+    const type = pass.type === 'password' ? 'text' : 'password';
+    pass.type = type;
+    toggle.classList.toggle('fa-eye');
+    toggle.classList.toggle('fa-eye-slash');
+  });
+</script>
+</body>
+</html>
