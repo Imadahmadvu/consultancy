@@ -72,6 +72,7 @@ img {
 }
 
 .logo {
+    width: 15rem;
     font-size: 27px;
     font-weight: 800;
     color: var(--primary);
