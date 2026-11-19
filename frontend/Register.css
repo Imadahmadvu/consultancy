@@ -42,6 +42,10 @@ body {
     font-size: 27px;
     font-weight: 800;
 }
+.logo img{
+    width: 20rem;
+    border-radius: 1.4rem;
+}
 
 .logo span {
     color: #65c8ff;

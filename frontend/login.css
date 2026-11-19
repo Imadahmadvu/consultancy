@@ -82,10 +82,12 @@ body {
     color: #172554;
 }
 
-.logo-text h1 span {
+/* .logo-text h1 span {
     color: #4f46e5;
+} */
+.logo-text img{
+    width: 17rem;
 }
-
 .logo-text p {
     font-size: 11px;
     color: #64748b;
