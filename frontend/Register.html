@@ -48,7 +48,7 @@
                 <p>Please fill in your details to register.</p>
             </div>
 
-            <form action="#" method="post">
+            <form id="Register-form"  method="post">
 
                 <div class="form-group">
                     <label>Full Name</label>
@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" placeholder="Enter your phone number" required>
+                    <input type="phone" placeholder="Enter your phone number" required>
                 </div>
 
                 <div class="form-row">
@@ -122,6 +122,70 @@
         </div>
 
     </div>
+<script>
+  const registerForm = document.getElementById("Register-form");
+  const registerBtn = registerForm.querySelector(".register-btn");
 
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Live Server POST (405 error) rokne ke liye
+
+    const inputs = registerForm.querySelectorAll("input");
+    const selects = registerForm.querySelectorAll("select");
+
+    const fullName = inputs[0].value.trim();
+    const email = inputs[1].value.trim();
+    const phone = inputs[2].value.trim();
+    const password = inputs[3].value;
+    const confirmPassword = inputs[4].value;
+
+    const country = selects[0].value.trim();
+    const studyInterest = selects[1].value.trim();
+
+    if (password !== confirmPassword) {
+      alert("Password aur Confirm Password match nahi kar rahe!");
+      return;
+    }
+
+    // Backend Inquiry model ke fields ke mutabiq payload
+    const payload = {
+      name: fullName,
+      email: email,
+      phone: phone,
+      topic: studyInterest || "General Consultancy",
+      message: `Registration Request | Country: ${country || "Not specified"} | Study Interest: ${studyInterest || "Not specified"}`
+    };
+
+    registerBtn.disabled = true;
+    const originalText = registerBtn.textContent;
+    registerBtn.textContent = "Submitting...";
+
+    try {
+      const response = await fetch("http://localhost:5000/api/inquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message || "Registration details submitted successfully!");
+        registerForm.reset();
+        // Agar submit ke baad login page par bhejna ho toh neeche wali line uncomment karein:
+        // window.location.href = "login.html";
+      } else {
+        alert(result.message || "Submission failed. Please check your details.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Backend server (http://localhost:5000) se connection nahi ho saka. Check karein ke node server.js chal raha hai.");
+    } finally {
+      registerBtn.disabled = false;
+      registerBtn.textContent = originalText;
+    }
+  });
+</script>
 </body>
 </html>

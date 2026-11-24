@@ -28,7 +28,7 @@
     <h2>Login to Your Account</h2>
     <p class="subtitle">Welcome back! Please login to continue</p>
 
-    <form id="loginForm">
+    <form id="inquiryForm">
       <label>EMAIL ADDRESS</label>
       <div class="input-group">
         <i class="fa-regular fa-envelope"></i>
@@ -47,7 +47,7 @@
         <a href="#">Forgot Password?</a>
       </div>
 
-      <button type="submit" class="btn-login">Login <i class="fa-solid fa-arrow-right"></i></button>
+      <button id="submitBtn" type="submit" class="btn-login">Login <i class="fa-solid fa-arrow-right"></i></button>
 
       <div class="divider"><span>OR</span></div>
 
@@ -63,12 +63,68 @@
 <script>
   const toggle = document.getElementById('togglePass');
   const pass = document.getElementById('password');
-  toggle.addEventListener('click', () => {    
-    const type = pass.type === 'password' ? 'text' : 'password';
-    pass.type = type;
-    toggle.classList.toggle('fa-eye');
-    toggle.classList.toggle('fa-eye-slash');
-  });
+
+  if (toggle && pass) {
+    toggle.addEventListener('click', () => {
+      const type = pass.type === 'password' ? 'text' : 'password';
+      pass.type = type;
+      toggle.classList.toggle('fa-eye');
+      toggle.classList.toggle('fa-eye-slash');
+    });
+  }
+
+  const loginForm = document.getElementById('inquiryForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const emailInput = loginForm.querySelector('input[type="email"]');
+      const email = emailInput ? emailInput.value.trim() : '';
+      const passwordValue = pass ? pass.value : '';
+
+      if (!email || !passwordValue) {
+        alert('Please enter both email and password.');
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        // Note: Agar backend mein abhi sirf /api/inquiries route bana hai aur /api/auth/login nahi,
+        // toh test ke liye /api/inquiries par log bhej sakte hain ya apna login endpoint use karein:
+        const response = await fetch('http://localhost:5000/api/inquiries', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: email.split('@')[0] || 'User',
+            email: email,
+            phone: 'N/A',
+            topic: 'Login Attempt',
+            message: `Login attempt from ${email}`
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert('Login request recorded successfully!');
+          // Jab real login auth route banayein, yahan dashboard/home page par redirect kar sakte hain:
+          // window.location.href = 'index.html';
+        } else {
+          alert(result.message || 'Login failed.');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Backend server (http://localhost:5000) se rabta nahi ho saka.');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
 </script>
 </body>
 </html>
