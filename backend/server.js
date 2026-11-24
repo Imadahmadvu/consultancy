@@ -30,3 +30,6 @@ mongoose
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     })
     .catch((err) => console.error('MongoDB connection error:', err));
+    const authRoutes = require('./routes/authRoutes');
+// ...
+app.use('/api/auth', authRoutes);

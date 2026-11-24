@@ -84,38 +84,23 @@
       const email = emailInput ? emailInput.value.trim() : '';
       const passwordValue = pass ? pass.value : '';
 
-      if (!email || !passwordValue) {
-        alert('Please enter both email and password.');
-        return;
-      }
-
       if (submitBtn) submitBtn.disabled = true;
 
       try {
-        // Note: Agar backend mein abhi sirf /api/inquiries route bana hai aur /api/auth/login nahi,
-        // toh test ke liye /api/inquiries par log bhej sakte hain ya apna login endpoint use karein:
-        const response = await fetch('http://localhost:5000/api/inquiries', {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: email.split('@')[0] || 'User',
-            email: email,
-            phone: 'N/A',
-            topic: 'Login Attempt',
-            message: `Login attempt from ${email}`
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: passwordValue })
         });
 
         const result = await response.json();
 
         if (response.ok) {
-          alert('Login request recorded successfully!');
-          // Jab real login auth route banayein, yahan dashboard/home page par redirect kar sakte hain:
-          // window.location.href = 'index.html';
+          localStorage.setItem('educonsult_user', JSON.stringify(result.user));
+          alert(result.message || 'Login successful!');
+          window.location.href = 'index.html';
         } else {
-          alert(result.message || 'Login failed.');
+          alert(result.message || 'Invalid email or password.');
         }
       } catch (error) {
         console.error('Login error:', error);

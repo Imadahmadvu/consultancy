@@ -28,3 +28,15 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
+
+router.get('/', async (req, res) => {
+  try {
+    const inquiries = await Inquiry.find().sort({ createdAt: -1 });
+    res.status(200).json({
+      count: inquiries.length,
+      data: inquiries
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching inquiries', error: error.message });
+  }
+});

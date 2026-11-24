@@ -127,7 +127,7 @@
   const registerBtn = registerForm.querySelector(".register-btn");
 
   registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Live Server POST (405 error) rokne ke liye
+    e.preventDefault();
 
     const inputs = registerForm.querySelectorAll("input");
     const selects = registerForm.querySelectorAll("select");
@@ -146,41 +146,36 @@
       return;
     }
 
-    // Backend Inquiry model ke fields ke mutabiq payload
-    const payload = {
-      name: fullName,
-      email: email,
-      phone: phone,
-      topic: studyInterest || "General Consultancy",
-      message: `Registration Request | Country: ${country || "Not specified"} | Study Interest: ${studyInterest || "Not specified"}`
-    };
-
     registerBtn.disabled = true;
     const originalText = registerBtn.textContent;
-    registerBtn.textContent = "Submitting...";
+    registerBtn.textContent = "Creating Account...";
 
     try {
-      const response = await fetch("http://localhost:5000/api/inquiries", {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          password,
+          country,
+          studyInterest
+        })
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        alert(result.message || "Registration details submitted successfully!");
+        alert(result.message || "Account created successfully!");
         registerForm.reset();
-        // Agar submit ke baad login page par bhejna ho toh neeche wali line uncomment karein:
-        // window.location.href = "login.html";
+        window.location.href = "login.html";
       } else {
-        alert(result.message || "Submission failed. Please check your details.");
+        alert(result.message || "Registration failed.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Backend server (http://localhost:5000) se connection nahi ho saka. Check karein ke node server.js chal raha hai.");
+      alert("Backend server (http://localhost:5000) se rabta nahi ho saka.");
     } finally {
       registerBtn.disabled = false;
       registerBtn.textContent = originalText;
