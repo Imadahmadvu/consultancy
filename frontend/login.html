@@ -57,6 +57,7 @@
       </button>
 
       <p class="register">Don't have an account? <a href="Register.html">Register Now</a></p>
+      <p id="msgBox" class="msg-box"></p>
     </form>
   </div>
 
@@ -75,7 +76,13 @@
 
   const loginForm = document.getElementById('inquiryForm');
   const submitBtn = document.getElementById('submitBtn');
+const msgBox = document.getElementById('msgBox');
 
+function showMsg(text, type) {
+  if (!msgBox) return;
+  msgBox.textContent = text;
+  msgBox.className = `msg-box ${type}`;
+}
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -96,18 +103,20 @@
         const result = await response.json();
 
         if (response.ok) {
-          localStorage.setItem('educonsult_user', JSON.stringify(result.user));
-          alert(result.message || 'Login successful!');
-          window.location.href = 'index.html';
-        } else {
-          alert(result.message || 'Invalid email or password.');
-        }
-      } catch (error) {
-        console.error('Login error:', error);
-        alert('Backend server (http://localhost:5000) se rabta nahi ho saka.');
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-      }
+  localStorage.setItem('educonsult_user', JSON.stringify(result.user));
+  showMsg(result.message || 'Login successful! Redirecting...', 'success');
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1000);
+} else {
+  showMsg(result.message || 'Invalid email or password.', 'error');
+}
+} catch (error) {
+  console.error('Login error:', error);
+  showMsg('Backend server (http://localhost:5000) se rabta nahi ho saka.', 'error');
+} finally {
+  if (submitBtn) submitBtn.disabled = false;
+}
     });
   }
 </script>

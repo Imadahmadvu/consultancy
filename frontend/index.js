@@ -88,4 +88,4 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderAuthNavbar);
 } else {
   renderAuthNavbar();
-}
+};
