@@ -38,6 +38,7 @@ module.exports = async (req, res) => {
 
     return res.status(405).json({ message: 'Method Not Allowed' });
   } catch (error) {
+    console.error('Inquiries API error:', error);
     return res.status(500).json({ message: 'Server error', error: error.message });
   }
 };

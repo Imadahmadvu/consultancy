@@ -152,7 +152,7 @@
     registerBtn.textContent = "Creating Account...";
 
     try {
-      const response = await fetch("/api/auth/register.js", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -18,7 +18,7 @@ if (inquiryForm) {
     if (formStatus) formStatus.textContent = "Submitting...";
 
     try {
-      const response = await fetch("/api/inquiries", {
+      const response = await fetch("api/inquiries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

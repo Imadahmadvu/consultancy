@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Login API error:', error);
     return res.status(500).json({ message: 'Server error during login', error: error.message });
   }
 };
