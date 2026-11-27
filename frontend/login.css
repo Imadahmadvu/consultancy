@@ -18,7 +18,29 @@ body {
     padding: 30px 15px;
     position: relative;
 }
+.msg-box {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: none;
+  text-align: center;
+}
 
+.msg-box.error {
+  display: block !important;
+  background-color: #fdecea;
+  color: #b02a1e;
+  border: 1px solid #f5b7b1;
+}
+
+.msg-box.success {
+  display: block !important;
+  background-color: #e8f8f0;
+  color: #1e7e48;
+  border: 1px solid #a3e4be;
+}
 /* Background Blur */
 
 .bg-blur {

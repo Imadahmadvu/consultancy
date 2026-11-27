@@ -48,7 +48,7 @@
       </div>
 
       <button id="submitBtn" type="submit" class="btn-login">Login <i class="fa-solid fa-arrow-right"></i></button>
-
+      <p id="msgBox" class="msg-box"></p>
       <div class="divider"><span>OR</span></div>
 
       <button type="button" class="btn-google">
@@ -57,25 +57,14 @@
       </button>
 
       <p class="register">Don't have an account? <a href="Register.html">Register Now</a></p>
-      <p id="msgBox" class="msg-box"></p>
+      
     </form>
   </div>
-
 <script>
-  const toggle = document.getElementById('togglePass');
-  const pass = document.getElementById('password');
-
-  if (toggle && pass) {
-    toggle.addEventListener('click', () => {
-      const type = pass.type === 'password' ? 'text' : 'password';
-      pass.type = type;
-      toggle.classList.toggle('fa-eye');
-      toggle.classList.toggle('fa-eye-slash');
-    });
-  }
-
-  const loginForm = document.getElementById('inquiryForm');
-  const submitBtn = document.getElementById('submitBtn');
+const toggle = document.getElementById('togglePass');
+const pass = document.getElementById('password');
+const loginForm = document.getElementById('inquiryForm');
+const submitBtn = document.getElementById('submitBtn');
 const msgBox = document.getElementById('msgBox');
 
 function showMsg(text, type) {
@@ -83,42 +72,52 @@ function showMsg(text, type) {
   msgBox.textContent = text;
   msgBox.className = `msg-box ${type}`;
 }
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
 
-      const emailInput = loginForm.querySelector('input[type="email"]');
-      const email = emailInput ? emailInput.value.trim() : '';
-      const passwordValue = pass ? pass.value : '';
-
-      if (submitBtn) submitBtn.disabled = true;
-
-      try {
-        const response = await fetch('http://localhost:5000/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password: passwordValue })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-  localStorage.setItem('educonsult_user', JSON.stringify(result.user));
-  showMsg(result.message || 'Login successful! Redirecting...', 'success');
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 1000);
-} else {
-  showMsg(result.message || 'Invalid email or password.', 'error');
+if (toggle && pass) {
+  toggle.addEventListener('click', () => {
+    const type = pass.type === 'password' ? 'text' : 'password';
+    pass.type = type;
+    toggle.classList.toggle('fa-eye');
+    toggle.classList.toggle('fa-eye-slash');
+  });
 }
-} catch (error) {
-  console.error('Login error:', error);
-  showMsg('Backend server (http://localhost:5000) se rabta nahi ho saka.', 'error');
-} finally {
-  if (submitBtn) submitBtn.disabled = false;
-}
-    });
-  }
+
+if (loginForm) {
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const emailInput = loginForm.querySelector('input[type="email"]');
+    const email = emailInput ? emailInput.value.trim() : '';
+    const passwordValue = pass ? pass.value : '';
+
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: passwordValue })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('educonsult_user', JSON.stringify(result.user));
+        showMsg(result.message || 'Login successful! Redirecting...', 'success');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      } else {
+        showMsg(result.message || 'Invalid email or password.', 'error');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      showMsg('Backend server se rabta nahi ho saka.', 'error');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+};
 </script>
 </body>
 </html>
